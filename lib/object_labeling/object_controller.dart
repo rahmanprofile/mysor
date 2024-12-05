@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
-class ImageController {
+class ObjectController {
 
-  ImageController.__();
-  static ImageController instance = ImageController.__();
+  ObjectController.__();
+  static ObjectController instance = ObjectController.__();
   final ImagePicker _picker = ImagePicker();
 
   Future<File?> pickImage(ImageSource source) async {
