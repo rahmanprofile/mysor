@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
-import 'package:hyler/utilities/utilities.dart';
+import 'package:hyler/face_detection/utilities.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GalleryView extends StatefulWidget {
