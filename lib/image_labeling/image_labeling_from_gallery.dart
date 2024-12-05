@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +13,7 @@ class ImageLabelingFromGallery extends StatefulWidget {
 }
 
 class _ImageLabelingFromGalleryState extends State<ImageLabelingFromGallery> {
+
   late ImageLabeler imageLabeler;
   final ImageController _machineController = ImageController.instance;
   File? imageUrl;
@@ -27,7 +27,6 @@ class _ImageLabelingFromGalleryState extends State<ImageLabelingFromGallery> {
   }
 
   Future<void> parseImage() async {
-    result = "";
     if (imageUrl != null) {
       final InputImage inputImage = InputImage.fromFile(imageUrl!);
       final List<ImageLabel> lable = await imageLabeler.processImage(inputImage);
@@ -35,8 +34,7 @@ class _ImageLabelingFromGalleryState extends State<ImageLabelingFromGallery> {
         final text = data.label;
         final index = data.index;
         final confidence = data.confidence;
-        result += "$text -- ${confidence.toStringAsFixed(2)}\n";
-        log("$text -- $confidence\n");
+        result += "$text -- ${confidence.toStringAsFixed(2)} -- $index\n";
         setState(() {});
       }
     }
@@ -48,10 +46,7 @@ class _ImageLabelingFromGalleryState extends State<ImageLabelingFromGallery> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          "Machine Learning",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-        ),
+        title: const Text("Image Labeling", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -59,7 +54,7 @@ class _ImageLabelingFromGalleryState extends State<ImageLabelingFromGallery> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (imageUrl != null)
-              Image.file(imageUrl!, height: MediaQuery.of(context).size.width / 1.5),
+              Image.file(imageUrl!, height: MediaQuery.of(context).size.width / 1.2, width: double.infinity, fit: BoxFit.cover),
             const SizedBox(height: 10),
             if (result != null)
               Expanded(child: Text(result, style: const TextStyle(color: Colors.black))),
@@ -68,7 +63,6 @@ class _ImageLabelingFromGalleryState extends State<ImageLabelingFromGallery> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          result = "";
           imageUrl = null;
           final img = await _machineController.pickImage(ImageSource.gallery);
           if (img != null) {
