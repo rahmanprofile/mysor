@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'machine_controller.dart';
+import 'image_controller.dart';
 
 class ImageLabelingFromGallery extends StatefulWidget {
   const ImageLabelingFromGallery({super.key});
