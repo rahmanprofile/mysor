@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hyler/image_labeling/image_labeling_from_camera.dart';
 import 'face_detection/face_detector_view.dart';
 import 'image_labeling/image_labeling_from_gallery.dart';
+import 'object_detection/object_detection.dart';
 
 late List<CameraDescription> cameras;
 Future<void> main() async {
@@ -55,13 +56,24 @@ class Home extends StatelessWidget {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const ImageLabelingFromCamera()));
               },
-            ),
+            ),//ObjectDetectionWidget
             const SizedBox(height: 10),
             button(
               context: context,
               title: "Gallery Image Labeling",
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ImageLabelingFromGallery()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ImageLabelingFromGallery()));
+              },
+            ),
+
+            const SizedBox(height: 10),
+            button(
+              context: context,
+              title: "Object Detection",
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ObjectDetectionWidget()));
               },
             ),
           ],
@@ -74,7 +86,7 @@ class Home extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 40,
+        height: 45,
         width: MediaQuery.of(context).size.width / 2,
         color: CupertinoColors.activeOrange,
         child: Center(
@@ -84,3 +96,4 @@ class Home extends StatelessWidget {
     );
   }
 }
+
